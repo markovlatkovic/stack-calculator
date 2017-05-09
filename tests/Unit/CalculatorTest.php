@@ -21,4 +21,13 @@ class CalculatorTest extends TestCase
 
         $this->assertEquals(null, $calculator->peek());
     }
+
+    public function testPush()
+    {
+        $calculator = new Calculator;
+
+        $calculator->push(1);
+
+        $this->assertEquals([1], $calculator->getStack());
+    }
 }
