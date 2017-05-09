@@ -6,6 +6,7 @@ namespace App;
 use App\Exceptions\DivisionByZeroException;
 use App\Exceptions\StackUnderflowException;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 
 class Calculator
 {
@@ -18,10 +19,19 @@ class Calculator
      * Constructs a stack calculator.
      *
      * @param array $stack initial stack, must be an array of numbers
+     * @throws InvalidArgumentException when array contains non-numeric elements
      */
     public function __construct(array $stack = [])
     {
-        $this->stack = new Collection($stack);
+        $this->stack = (new Collection($stack))->map(function ($item) {
+            // only allow numeric elements
+            if (! is_numeric($item)) {
+                throw new InvalidArgumentException;
+            }
+
+            // cast values to floats
+            return (float)$item;
+        });
     }
 
     /**

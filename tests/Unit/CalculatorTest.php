@@ -22,6 +22,14 @@ class CalculatorTest extends TestCase
         $this->assertEquals([1, 2, 3], $calculator->getStack());
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testConstructorThrowsExceptionWithNonNumericArrayElements()
+    {
+        $calculator = new Calculator(['']);
+    }
+
     public function testPeek()
     {
         $calculator = new Calculator([1, 2]);
