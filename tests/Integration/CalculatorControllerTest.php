@@ -77,6 +77,20 @@ class CalculatorControllerTest extends TestCase
         $this->assertRequest("/calc/1/divide", 'error: division by zero', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
+    public function testExampleInRequirements()
+    {
+        $this->assertRequest('/calc/1/push/1', '1');
+        $this->assertRequest('/calc/1/push/4', '4');
+        $this->assertRequest('/calc/1/add', '5');
+        $this->assertRequest('/calc/1/push/10', '10');
+        $this->assertRequest('/calc/1/multiply', '50');
+        $this->assertRequest('/calc/1/push/2', '2');
+        $this->assertRequest('/calc/1/divide', '25');
+        $this->assertRequest('/calc/2/peek', 'error: stack underflow', Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertRequest('/calc/2/push/20', '20');
+        $this->assertRequest('/calc/2/divide', 'error: stack underflow', Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+
     private function assertRequest($uri, $expectedContent, $expectedStatus = Response::HTTP_OK)
     {
         $this->get($uri);
