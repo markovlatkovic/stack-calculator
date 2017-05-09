@@ -71,7 +71,12 @@ class Calculator
             throw new EmptyStackException;
         }
 
-        $this->push($this->pop() + $this->pop());
+        // [..., a, b]
+        $b = $this->pop();
+        $a = $this->pop();
+
+        $this->push($a + $b);
+        // [..., a + b]
     }
 
     /**
@@ -83,7 +88,12 @@ class Calculator
             throw new EmptyStackException;
         }
 
-        $this->push(-$this->pop() + $this->pop());
+        // [..., a, b]
+        $b = $this->pop();
+        $a = $this->pop();
+
+        $this->push($a - $b);
+        // [..., a - b]
     }
 
     /**
@@ -95,7 +105,12 @@ class Calculator
             throw new EmptyStackException;
         }
 
-        $this->push($this->pop() * $this->pop());
+        // [..., a, b]
+        $b = $this->pop();
+        $a = $this->pop();
+
+        $this->push($a * $b);
+        // [..., a * b]
     }
 
     /**
@@ -107,10 +122,12 @@ class Calculator
             throw new EmptyStackException;
         }
 
+        // [..., a, b]
         $b = $this->pop();
         $a = $this->pop();
 
         $this->push($a / $b);
+        // [..., a / b]
     }
 
     /**
