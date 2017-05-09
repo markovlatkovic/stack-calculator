@@ -10,17 +10,9 @@ class CalculatorControllerTest extends TestCase
 {
     public function testPushPeekPop()
     {
-        $this->get('/calc/1/push/20');
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertEquals('20', $this->response->getContent());
-
-        $this->get('/calc/1/peek');
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertEquals('20', $this->response->getContent());
-
-        $this->get('/calc/1/pop');
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertEquals('20', $this->response->getContent());
+        $this->assertRequest('/calc/1/push/20', '20');
+        $this->assertRequest('/calc/1/peek', '20');
+        $this->assertRequest('/calc/1/pop', '20');
     }
 
     public function testAddSubtractMultiplyDivide()
@@ -31,25 +23,13 @@ class CalculatorControllerTest extends TestCase
         $this->get('/calc/1/push/4');
         $this->get('/calc/1/push/5');
         // [24, 2, 3, 4, 5]
-
-        $this->get('/calc/1/add');
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertEquals('9', $this->response->getContent());
+        $this->assertRequest('/calc/1/add', '9');
         // [24, 2, 3, 9]
-
-        $this->get('/calc/1/subtract');
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertEquals('-6', $this->response->getContent());
+        $this->assertRequest('/calc/1/subtract', '-6');
         // [24, 2, -6]
-
-        $this->get('/calc/1/multiply');
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertEquals('-12', $this->response->getContent());
+        $this->assertRequest('/calc/1/multiply', '-12');
         // [24, -12]
-
-        $this->get('/calc/1/divide');
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertEquals('-2', $this->response->getContent());
+        $this->assertRequest('/calc/1/divide', '-2');
         // [-2]
     }
 
@@ -62,59 +42,31 @@ class CalculatorControllerTest extends TestCase
         // 1: [1, 3]
         // 2: [2, 4]
 
-        $this->get('/calc/1/peek');
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertEquals('3', $this->response->getContent());
-
-        $this->get('/calc/2/peek');
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertEquals('4', $this->response->getContent());
-
-        $this->get('/calc/1/add');
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertEquals('4', $this->response->getContent());
-
-        $this->get('/calc/2/multiply');
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertEquals('8', $this->response->getContent());
+        $this->assertRequest('/calc/1/peek', '3');
+        $this->assertRequest('/calc/2/peek', '4');
+        $this->assertRequest('/calc/1/add', '4');
+        $this->assertRequest('/calc/2/multiply', '8');
     }
 
     public function testPeekEmpty()
     {
-        $this->get('/calc/1/peek');
-        $this->assertResponseStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
-        $this->assertEquals('error: stack underflow', $this->response->getContent());
+        $this->assertRequest('/calc/1/peek', 'error: stack underflow', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     public function testPushInvalidArgument()
     {
         $this->get('/calc/1/push/1');
-
-        $this->get('/calc/1/push/x');
-        $this->assertResponseStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
-        $this->assertEquals('error: invalid argument', $this->response->getContent());
-
-        $this->get('/calc/1/peek');
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertEquals('1', $this->response->getContent());
+        $this->assertRequest('/calc/1/push/x', 'error: invalid argument', Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertRequest('/calc/1/peek', '1');
     }
 
     public function testStackUnderflowErrorsForOperations()
     {
         foreach (['add', 'subtract', 'multiply', 'divide'] as $i => $operation) {
-            $this->get("/calc/$i/$operation");
-            $this->assertResponseStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
-            $this->assertEquals('error: stack underflow', $this->response->getContent());
-
+            $this->assertRequest("/calc/$i/$operation", 'error: stack underflow', Response::HTTP_INTERNAL_SERVER_ERROR);
             $this->get("/calc/$i/push/1");
-
-            $this->get("/calc/$i/$operation");
-            $this->assertResponseStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
-            $this->assertEquals('error: stack underflow', $this->response->getContent());
-
-            $this->get("/calc/$i/peek");
-            $this->assertResponseStatus(Response::HTTP_OK);
-            $this->assertEquals('1', $this->response->getContent());
+            $this->assertRequest("/calc/$i/$operation", 'error: stack underflow', Response::HTTP_INTERNAL_SERVER_ERROR);
+            $this->assertRequest("/calc/$i/peek", '1');
         }
     }
 
@@ -122,9 +74,13 @@ class CalculatorControllerTest extends TestCase
     {
         $this->get('/calc/1/push/1');
         $this->get('/calc/1/push/0');
+        $this->assertRequest("/calc/1/divide", 'error: division by zero', Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
 
-        $this->get('/calc/1/divide');
-        $this->assertResponseStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
-        $this->assertEquals('error: division by zero', $this->response->getContent());
+    private function assertRequest($uri, $expectedContent, $expectedStatus = Response::HTTP_OK)
+    {
+        $this->get($uri);
+        $this->assertEquals($expectedContent, $this->response->getContent());
+        $this->assertResponseStatus($expectedStatus);
     }
 }
