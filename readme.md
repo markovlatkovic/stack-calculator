@@ -4,7 +4,7 @@ An implementation of a stack calculator via HTTP endpoints. The endpoints provid
 
 ### Demo
 
-A demo is available at [https://calc.nutsweb.nl]
+A demo is available at https://calc.nutsweb.nl
 
 ### Endpoints
 
