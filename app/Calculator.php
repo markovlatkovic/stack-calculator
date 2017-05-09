@@ -54,9 +54,13 @@ class Calculator
      *
      * @param float $number the number to push onto the stack
      */
-    public function push(float $number)
+    public function push($number)
     {
-        $this->stack->push($number);
+        if (! is_numeric($number)) {
+            throw new InvalidArgumentException;
+        }
+
+        $this->stack->push((float)$number);
     }
 
     /**

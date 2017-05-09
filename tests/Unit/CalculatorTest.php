@@ -55,6 +55,16 @@ class CalculatorTest extends TestCase
         $this->assertEquals([1], $calculator->getStack());
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testPushThrowsErrorWhenArgumentIsNonNumeric()
+    {
+        $calculator = new Calculator;
+
+        $calculator->push('');
+    }
+
     public function testPushTwoNumbers()
     {
         $calculator = new Calculator;
