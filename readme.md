@@ -1,4 +1,5 @@
 ## Stack Calculator
+[![Build Status](https://travis-ci.org/jeroennoten/stack-calculator.svg?branch=master)](https://travis-ci.org/jeroennoten/stack-calculator)
 
 An implementation of a stack calculator via HTTP endpoints. The endpoints provide operations that that work on a set of stack calculators. Each calculator is identified by an arbitrary string and is created on first use of the identifier.
 
