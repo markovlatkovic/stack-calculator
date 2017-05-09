@@ -231,4 +231,13 @@ class CalculatorTest extends TestCase
         $calculator = new Calculator([1]);
         $calculator->divide();
     }
+
+    /**
+     * @expectedException \App\Exceptions\DivisionByZeroException
+     */
+    public function testDivideThrowsExceptionWhenDivisorIsZero()
+    {
+        $calculator = new Calculator([1, 0]);
+        $calculator->divide();
+    }
 }

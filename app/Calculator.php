@@ -3,6 +3,7 @@
 namespace App;
 
 
+use App\Exceptions\DivisionByZeroException;
 use App\Exceptions\StackUnderflowException;
 use Illuminate\Support\Collection;
 
@@ -125,6 +126,10 @@ class Calculator
         // [..., a, b]
         $b = $this->pop();
         $a = $this->pop();
+
+        if ($b == 0) {
+            throw new DivisionByZeroException;
+        }
 
         $this->push($a / $b);
         // [..., a / b]
