@@ -57,3 +57,9 @@ The `app/Calculator.php` contains all logic and each method is unit tested.
 All HTTP endpoints are defined in `routes/web.php`, which delegates to `app/Http/Controllers/CalculatorController.php`.
 The controller retrieves the relevant calculator stack from the cache, delegates the calculations to the `Calculator` class and stores the stack afterwards.
 The integration tests test the complete flow through the app.
+
+### Suggestions for improvements
+- A reset endpoint to clear a calculator.
+- Make better use of the available HTTP methods, e.g. `GET` for requests that do no modify state and others for requests that do modify the state.
+- An endpoint to review the state.
+- Responses a common standard format, such as JSON or XML to make them better processable.
