@@ -2,6 +2,10 @@
 
 An implementation of a stack calculator via HTTP endpoints. The endpoints provide operations that that work on a set of stack calculators. Each calculator is identified by an arbitrary string and is created on first use of the identifier.
 
+### Demo
+
+A demo is available at [https://calc.nutsweb.nl]
+
 ### Endpoints
 
 All endpoints are `GET` requests, in order to make it easy using the endpoints in a regular browser.
