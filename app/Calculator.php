@@ -8,6 +8,9 @@ use Illuminate\Support\Collection;
 
 class Calculator
 {
+    /**
+     * @var Collection the stack, wrapped in a collection object
+     */
     private $stack;
 
     /**
