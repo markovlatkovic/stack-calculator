@@ -77,4 +77,12 @@ class Calculator
     {
         $this->push($this->pop() * $this->pop());
     }
+
+    public function divide()
+    {
+        $b = $this->pop();
+        $a = $this->pop();
+
+        $this->push($a / $b);
+    }
 }
