@@ -48,4 +48,14 @@ class CalculatorTest extends TestCase
         $this->assertEquals(1, $calculator->pop());
         $this->assertEmpty($calculator->getStack());
     }
+
+    public function testPopTwoNumbers()
+    {
+        $calculator = new Calculator([1, 2]);
+
+        $this->assertEquals(2, $calculator->pop());
+        $this->assertEquals([1], $calculator->getStack());
+        $this->assertEquals(1, $calculator->pop());
+        $this->assertEmpty($calculator->getStack());
+    }
 }
