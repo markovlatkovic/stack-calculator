@@ -4,6 +4,8 @@ An implementation of a stack calculator via HTTP endpoints. The endpoints provid
 
 ### Endpoints
 
+All endpoints are `GET` requests, in order to make it easy using the endpoints in a regular browser.
+
 #### `/calc/:id/peek` 
 - Returns stack[top].
 - Returns an error when the stack is empty.
