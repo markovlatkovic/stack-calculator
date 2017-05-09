@@ -44,3 +44,15 @@ Success responses have an HTTP status code of `200`, error responses have a `500
 - Returns the new stack[top].
 - Returns `error: stack underflow` when the stack contains less than two elements.
 - Returns `error: devision by zero` when stack[top] is zero.
+
+### Implementation details
+
+The application implemented in PHP and makes use of the Lumen framework. It is a '*The stunningly fast micro-framework by Laravel*'.
+
+The stack of each calculator is stored using the caching layer of the framework. This makes it possibly to configure the cache driver to use e.g. the filesystem, Redis, Memcached, or even a regular database. This improves scalability.
+
+The `app/Calculator.php` contains all logic and each method is unit tested.
+
+All HTTP endpoints are defined in `routes/web.php`, which delegates to `app/Http/Controllers/CalculatorController.php`.
+The controller retrieves the relevant calculator stack from the cache, delegates the calculations to the `Calculator` class and stores the stack afterwards.
+The integration tests test the complete flow through the app.
