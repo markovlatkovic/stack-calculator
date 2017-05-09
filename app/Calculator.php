@@ -43,4 +43,14 @@ class Calculator
     {
         return $this->stack->all();
     }
+
+    /**
+     * Returns the top from the stack and removes it
+     *
+     * @return float top of the stack that is removed
+     */
+    public function pop()
+    {
+        return $this->stack->pop();
+    }
 }
