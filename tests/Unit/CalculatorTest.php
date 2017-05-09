@@ -14,4 +14,11 @@ class CalculatorTest extends TestCase
 
         $this->assertEquals(2, $calculator->peek());
     }
+
+    public function testPeekReturnsNullWhenStackIsEmpty()
+    {
+        $calculator = new Calculator;
+
+        $this->assertEquals(null, $calculator->peek());
+    }
 }
