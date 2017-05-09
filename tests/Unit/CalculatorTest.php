@@ -115,4 +115,13 @@ class CalculatorTest extends TestCase
 
         $this->assertEquals([60], $calculator->getStack());
     }
+
+    public function testDivide()
+    {
+        $calculator = new Calculator([10, 2]);
+
+        $calculator->divide();
+
+        $this->assertEquals([5], $calculator->getStack());
+    }
 }
