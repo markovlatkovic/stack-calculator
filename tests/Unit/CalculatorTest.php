@@ -15,11 +15,13 @@ class CalculatorTest extends TestCase
         $this->assertEquals(2, $calculator->peek());
     }
 
-    public function testPeekReturnsNullWhenStackIsEmpty()
+    /**
+     * @expectedException \App\Exceptions\EmptyStackException
+     */
+    public function testPeekThrowsExceptionWhenStackIsEmpty()
     {
         $calculator = new Calculator;
-
-        $this->assertEquals(null, $calculator->peek());
+        $calculator->peek();
     }
 
     public function testPush()
@@ -59,6 +61,15 @@ class CalculatorTest extends TestCase
         $this->assertEmpty($calculator->getStack());
     }
 
+    /**
+     * @expectedException \App\Exceptions\EmptyStackException
+     */
+    public function testPopThrowsExceptionWhenStackIsEmpty()
+    {
+        $calculator = new Calculator;
+        $calculator->pop();
+    }
+
     public function testAdd()
     {
         $calculator = new Calculator([1, 2]);
@@ -76,6 +87,24 @@ class CalculatorTest extends TestCase
         $calculator->add(); // [6]
 
         $this->assertEquals([6], $calculator->getStack());
+    }
+
+    /**
+     * @expectedException \App\Exceptions\EmptyStackException
+     */
+    public function testAddThrowsExceptionWhenStackIsEmpty()
+    {
+        $calculator = new Calculator;
+        $calculator->add();
+    }
+
+    /**
+     * @expectedException \App\Exceptions\EmptyStackException
+     */
+    public function testAddThrowsExceptionWhenStackContainsOneElement()
+    {
+        $calculator = new Calculator([1]);
+        $calculator->add();
     }
 
     public function testSubtract()
@@ -97,6 +126,24 @@ class CalculatorTest extends TestCase
         $this->assertEquals([2], $calculator->getStack());
     }
 
+    /**
+     * @expectedException \App\Exceptions\EmptyStackException
+     */
+    public function testSubtractThrowsExceptionWhenStackIsEmpty()
+    {
+        $calculator = new Calculator;
+        $calculator->subtract();
+    }
+
+    /**
+     * @expectedException \App\Exceptions\EmptyStackException
+     */
+    public function testSubtractThrowsExceptionWhenStackContainsOneElement()
+    {
+        $calculator = new Calculator([1]);
+        $calculator->subtract();
+    }
+
     public function testMultiply()
     {
         $calculator = new Calculator([10, 2]);
@@ -116,6 +163,24 @@ class CalculatorTest extends TestCase
         $this->assertEquals([60], $calculator->getStack());
     }
 
+    /**
+     * @expectedException \App\Exceptions\EmptyStackException
+     */
+    public function testMultiplyThrowsExceptionWhenStackIsEmpty()
+    {
+        $calculator = new Calculator;
+        $calculator->multiply();
+    }
+
+    /**
+     * @expectedException \App\Exceptions\EmptyStackException
+     */
+    public function testMultiplyThrowsExceptionWhenStackContainsOneElement()
+    {
+        $calculator = new Calculator([1]);
+        $calculator->multiply();
+    }
+
     public function testDivide()
     {
         $calculator = new Calculator([10, 2]);
@@ -133,5 +198,23 @@ class CalculatorTest extends TestCase
         $calculator->divide(); // [2]
 
         $this->assertEquals([2], $calculator->getStack());
+    }
+
+    /**
+     * @expectedException \App\Exceptions\EmptyStackException
+     */
+    public function testDivideThrowsExceptionWhenStackIsEmpty()
+    {
+        $calculator = new Calculator;
+        $calculator->divide();
+    }
+
+    /**
+     * @expectedException \App\Exceptions\EmptyStackException
+     */
+    public function testDivideThrowsExceptionWhenStackContainsOneElement()
+    {
+        $calculator = new Calculator([1]);
+        $calculator->divide();
     }
 }

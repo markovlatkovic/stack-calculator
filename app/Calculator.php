@@ -3,6 +3,7 @@
 namespace App;
 
 
+use App\Exceptions\EmptyStackException;
 use Illuminate\Support\Collection;
 
 class Calculator
@@ -23,9 +24,14 @@ class Calculator
      * Returns the top of the stack
      *
      * @return int stack[top]
+     * @throws EmptyStackException when the stack is empty
      */
     public function peek()
     {
+        if ($this->stack->isEmpty()) {
+            throw new EmptyStackException;
+        }
+
         return $this->stack->last();
     }
 
@@ -51,6 +57,10 @@ class Calculator
      */
     public function pop()
     {
+        if ($this->stack->isEmpty()) {
+            throw new EmptyStackException;
+        }
+
         return $this->stack->pop();
     }
 
@@ -59,6 +69,10 @@ class Calculator
      */
     public function add()
     {
+        if ($this->stack->count() < 2) {
+            throw new EmptyStackException;
+        }
+
         $this->push($this->pop() + $this->pop());
     }
 
@@ -67,6 +81,10 @@ class Calculator
      */
     public function subtract()
     {
+        if ($this->stack->count() < 2) {
+            throw new EmptyStackException;
+        }
+
         $this->push(-$this->pop() + $this->pop());
     }
 
@@ -75,11 +93,19 @@ class Calculator
      */
     public function multiply()
     {
+        if ($this->stack->count() < 2) {
+            throw new EmptyStackException;
+        }
+
         $this->push($this->pop() * $this->pop());
     }
 
     public function divide()
     {
+        if ($this->stack->count() < 2) {
+            throw new EmptyStackException;
+        }
+
         $b = $this->pop();
         $a = $this->pop();
 
