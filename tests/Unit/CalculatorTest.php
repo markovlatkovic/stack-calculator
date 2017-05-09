@@ -96,4 +96,13 @@ class CalculatorTest extends TestCase
 
         $this->assertEquals([2], $calculator->getStack());
     }
+
+    public function testMultiply()
+    {
+        $calculator = new Calculator([10, 2]);
+
+        $calculator->multiply();
+
+        $this->assertEquals([20], $calculator->getStack());
+    }
 }
