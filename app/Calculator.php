@@ -45,6 +45,11 @@ class Calculator
         $this->stack->push($number);
     }
 
+    /**
+     * Returns the current stack
+     *
+     * @return array the current stack
+     */
     public function getStack()
     {
         return $this->stack->all();
