@@ -77,7 +77,7 @@ class Calculator
     }
 
     /**
-     * removes the top and top-1 from the stack and replaces it with stack[top-1]-stack[top]
+     * Removes the top and top-1 from the stack and replaces it with stack[top-1]-stack[top]
      */
     public function subtract()
     {
