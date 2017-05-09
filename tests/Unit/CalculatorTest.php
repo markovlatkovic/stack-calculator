@@ -30,4 +30,14 @@ class CalculatorTest extends TestCase
 
         $this->assertEquals([1], $calculator->getStack());
     }
+
+    public function testPushTwoNumbers()
+    {
+        $calculator = new Calculator;
+
+        $calculator->push(1);
+        $calculator->push(2.5);
+
+        $this->assertEquals([1, 2.5], $calculator->getStack());
+    }
 }
