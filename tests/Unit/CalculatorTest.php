@@ -27,7 +27,7 @@ class CalculatorTest extends TestCase
      */
     public function testConstructorThrowsExceptionWithNonNumericArrayElements()
     {
-        $calculator = new Calculator(['']);
+        new Calculator(['']);
     }
 
     public function testPeek()
