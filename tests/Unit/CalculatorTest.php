@@ -77,4 +77,13 @@ class CalculatorTest extends TestCase
 
         $this->assertEquals([6], $calculator->getStack());
     }
+
+    public function testSubtract()
+    {
+        $calculator = new Calculator([1, 2]);
+
+        $calculator->subtract();
+
+        $this->assertEquals([-1], $calculator->getStack());
+    }
 }
