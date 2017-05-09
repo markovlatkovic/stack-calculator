@@ -52,4 +52,30 @@ class CalculatorControllerTest extends TestCase
         $this->assertEquals('-2', $this->response->getContent());
         // [-2]
     }
+
+    public function testMultipleCalculators()
+    {
+        $this->get('/calc/1/push/1');
+        $this->get('/calc/2/push/2');
+        $this->get('/calc/1/push/3');
+        $this->get('/calc/2/push/4');
+        // 1: [1, 3]
+        // 2: [2, 4]
+
+        $this->get('/calc/1/peek');
+        $this->assertResponseStatus(Response::HTTP_OK);
+        $this->assertEquals('3', $this->response->getContent());
+
+        $this->get('/calc/2/peek');
+        $this->assertResponseStatus(Response::HTTP_OK);
+        $this->assertEquals('4', $this->response->getContent());
+
+        $this->get('/calc/1/add');
+        $this->assertResponseStatus(Response::HTTP_OK);
+        $this->assertEquals('4', $this->response->getContent());
+
+        $this->get('/calc/2/multiply');
+        $this->assertResponseStatus(Response::HTTP_OK);
+        $this->assertEquals('8', $this->response->getContent());
+    }
 }
