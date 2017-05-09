@@ -6,7 +6,7 @@ namespace App;
 use App\Exceptions\DivisionByZeroException;
 use App\Exceptions\StackUnderflowException;
 use Illuminate\Support\Collection;
-use InvalidArgumentException;
+use App\Exceptions\InvalidArgumentException;
 
 class Calculator
 {

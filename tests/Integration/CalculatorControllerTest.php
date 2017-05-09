@@ -78,4 +78,53 @@ class CalculatorControllerTest extends TestCase
         $this->assertResponseStatus(Response::HTTP_OK);
         $this->assertEquals('8', $this->response->getContent());
     }
+
+    public function testPeekEmpty()
+    {
+        $this->get('/calc/1/peek');
+        $this->assertResponseStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertEquals('error: stack underflow', $this->response->getContent());
+    }
+
+    public function testPushInvalidArgument()
+    {
+        $this->get('/calc/1/push/1');
+
+        $this->get('/calc/1/push/x');
+        $this->assertResponseStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertEquals('error: invalid argument', $this->response->getContent());
+
+        $this->get('/calc/1/peek');
+        $this->assertResponseStatus(Response::HTTP_OK);
+        $this->assertEquals('1', $this->response->getContent());
+    }
+
+    public function testStackUnderflowErrorsForOperations()
+    {
+        foreach (['add', 'subtract', 'multiply', 'divide'] as $i => $operation) {
+            $this->get("/calc/$i/$operation");
+            $this->assertResponseStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+            $this->assertEquals('error: stack underflow', $this->response->getContent());
+
+            $this->get("/calc/$i/push/1");
+
+            $this->get("/calc/$i/$operation");
+            $this->assertResponseStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+            $this->assertEquals('error: stack underflow', $this->response->getContent());
+
+            $this->get("/calc/$i/peek");
+            $this->assertResponseStatus(Response::HTTP_OK);
+            $this->assertEquals('1', $this->response->getContent());
+        }
+    }
+
+    public function testDivisionByZeroError()
+    {
+        $this->get('/calc/1/push/1');
+        $this->get('/calc/1/push/0');
+
+        $this->get('/calc/1/divide');
+        $this->assertResponseStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertEquals('error: division by zero', $this->response->getContent());
+    }
 }
