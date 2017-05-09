@@ -46,6 +46,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        return new Response("error: {$e->getMessage()}", 500);
+        $message = $e->getMessage() ?: class_basename($e);
+        return new Response("error: $message", 500);
     }
 }
