@@ -100,6 +100,9 @@ class Calculator
         $this->push($this->pop() * $this->pop());
     }
 
+    /**
+     * Removes the top and top-1 from the stack and replaces it with stack[top-1]/stack[top]
+     */
     public function divide()
     {
         if ($this->stack->count() < 2) {
