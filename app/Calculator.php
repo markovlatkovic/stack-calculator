@@ -61,4 +61,12 @@ class Calculator
     {
         $this->push($this->pop() + $this->pop());
     }
+
+    /**
+     * removes the top and top-1 from the stack and replaces it with stack[top-1]-stack[top]
+     */
+    public function subtract()
+    {
+        $this->push(-$this->pop() + $this->pop());
+    }
 }
