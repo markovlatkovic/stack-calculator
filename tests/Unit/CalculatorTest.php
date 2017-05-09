@@ -105,4 +105,14 @@ class CalculatorTest extends TestCase
 
         $this->assertEquals([20], $calculator->getStack());
     }
+
+    public function testMultiplyTwoTimes()
+    {
+        $calculator = new Calculator([10, 2, 3]);
+
+        $calculator->multiply(); // [10, 6]
+        $calculator->multiply(); // [60]
+
+        $this->assertEquals([60], $calculator->getStack());
+    }
 }
