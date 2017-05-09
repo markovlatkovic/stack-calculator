@@ -1,16 +1,13 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
+$app->group(['prefix' => '/calc/{id}'], function () use ($app) {
 
-$app->get('/', function () use ($app) {
-    return $app->version();
+    $app->get('/peek', 'CalculatorController@peek');
+    $app->get('/push/{n}', 'CalculatorController@push');
+    $app->get('/pop', 'CalculatorController@pop');
+    $app->get('/add', 'CalculatorController@add');
+    $app->get('/subtract', 'CalculatorController@subtract');
+    $app->get('/multiply', 'CalculatorController@multiply');
+    $app->get('/divide', 'CalculatorController@divide');
+
 });
