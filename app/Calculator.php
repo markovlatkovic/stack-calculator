@@ -53,6 +53,7 @@ class Calculator
      * Pushes a number onto the stack
      *
      * @param float $number the number to push onto the stack
+     * @throws InvalidArgumentException when the $number is non-numeric
      */
     public function push($number)
     {
@@ -60,6 +61,7 @@ class Calculator
             throw new InvalidArgumentException;
         }
 
+        // cast value to float
         $this->stack->push((float)$number);
     }
 
@@ -67,6 +69,7 @@ class Calculator
      * Returns the top from the stack and removes it
      *
      * @return float top of the stack that is removed
+     * @throws StackUnderflowException when the stack is empty
      */
     public function pop()
     {
@@ -79,6 +82,8 @@ class Calculator
 
     /**
      * Removes the top and top-1 from the stack and replaces it with stack[top-1]+stack[top]
+     *
+     * @throws StackUnderflowException when the stack has less than two elements
      */
     public function add()
     {
@@ -96,6 +101,8 @@ class Calculator
 
     /**
      * Removes the top and top-1 from the stack and replaces it with stack[top-1]-stack[top]
+     *
+     * @throws StackUnderflowException when the stack has less than two elements
      */
     public function subtract()
     {
@@ -113,6 +120,8 @@ class Calculator
 
     /**
      * Removes the top and top-1 from the stack and replaces it with stack[top-1]*stack[top]
+     *
+     * @throws StackUnderflowException when the stack has less than two elements
      */
     public function multiply()
     {
@@ -130,6 +139,9 @@ class Calculator
 
     /**
      * Removes the top and top-1 from the stack and replaces it with stack[top-1]/stack[top]
+     *
+     * @throws StackUnderflowException when the stack has less than two elements
+     * @throws DivisionByZeroException when the stack[top] is zero
      */
     public function divide()
     {
@@ -137,13 +149,13 @@ class Calculator
             throw new StackUnderflowException;
         }
 
+        if ($this->peek() == 0) {
+            throw new DivisionByZeroException;
+        }
+
         // [..., a, b]
         $b = $this->pop();
         $a = $this->pop();
-
-        if ($b == 0) {
-            throw new DivisionByZeroException;
-        }
 
         $this->push($a / $b);
         // [..., a / b]
