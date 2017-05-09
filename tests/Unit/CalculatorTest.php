@@ -72,8 +72,8 @@ class CalculatorTest extends TestCase
     {
         $calculator = new Calculator([1, 2, 3]);
 
-        $calculator->add();
-        $calculator->add();
+        $calculator->add(); // [1, 5]
+        $calculator->add(); // [6]
 
         $this->assertEquals([6], $calculator->getStack());
     }
@@ -85,5 +85,15 @@ class CalculatorTest extends TestCase
         $calculator->subtract();
 
         $this->assertEquals([-1], $calculator->getStack());
+    }
+
+    public function testSubtractTwoTimes()
+    {
+        $calculator = new Calculator([1, 2, 3]);
+
+        $calculator->subtract(); // [1, -1]
+        $calculator->subtract(); // [2]
+
+        $this->assertEquals([2], $calculator->getStack());
     }
 }
