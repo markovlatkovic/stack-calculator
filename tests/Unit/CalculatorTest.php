@@ -8,6 +8,20 @@ use Tests\TestCase;
 
 class CalculatorTest extends TestCase
 {
+    public function testConstructorWithEmptyStack()
+    {
+        $calculator = new Calculator;
+
+        $this->assertEquals([], $calculator->getStack());
+    }
+
+    public function testConstructorWithNonEmptyStack()
+    {
+        $calculator = new Calculator([1, 2, 3]);
+
+        $this->assertEquals([1, 2, 3], $calculator->getStack());
+    }
+
     public function testPeek()
     {
         $calculator = new Calculator([1, 2]);
