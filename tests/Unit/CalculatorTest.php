@@ -40,4 +40,12 @@ class CalculatorTest extends TestCase
 
         $this->assertEquals([1, 2.5], $calculator->getStack());
     }
+
+    public function testPop()
+    {
+        $calculator = new Calculator([1]);
+
+        $this->assertEquals(1, $calculator->pop());
+        $this->assertEmpty($calculator->getStack());
+    }
 }
