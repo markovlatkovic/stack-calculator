@@ -13,33 +13,34 @@ Success responses have an HTTP status code of `200`, error responses have a `500
 
 #### `/calc/:id/peek` 
 - Returns stack[top].
-- Returns an error when the stack is empty.
+- Returns `error: stack underflow` when the stack is empty.
 
 #### `/calc/:id/push/<n>`
 - Pushes a number onto the stack.
 - Returns the new stack[top].
-- Returns an error when the value is non-numeric. 
+- Returns `error: invalid argument` when the value is non-numeric. 
 
 #### `/calc/:id/pop`
 - Returns the top from the stack and removes it.
-- Returns an error when the stack is empty.
+- Returns `error: stack underflow` when the stack is empty.
 
 #### `/calc/:id/add`
 - Removes the top and top-1 from the stack and replaces it with stack[top-1]+stack[top].
 - Returns the new stack[top].
-- Returns an error when the stack contains less than two elements.
+- Returns `error: stack underflow` when the stack contains less than two elements.
 
 #### `/calc/:id/subtract`
 - Removes the top and top-1 from the stack and replaces it with stack[top-1]-stack[top].
 - Returns the new stack[top].
-- Returns an error when the stack contains less than two elements.
+- Returns `error: invalid argument` when the stack contains less than two elements.
 
 #### `/calc/:id/multiply`
 - Removes the top and top-1 from the stack and replaces it with stack[top-1]*stack[top].
 - Returns the new stack[top].
-- Returns an error when the stack contains less than two elements.
+- Returns `error: invalid argument` when the stack contains less than two elements.
 
 #### `/calc/:id/divide`
 - Removes the top and top-1 from the stack and replaces it with stack[top-1]/stack[top].
 - Returns the new stack[top].
-- Returns an error when the stack contains less than two elements or when stack[top] is zero.
+- Returns `error: invalid argument` when the stack contains less than two elements.
+- Returns `error: devision by zero` when stack[top] is zero.
