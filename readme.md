@@ -5,6 +5,7 @@ An implementation of a stack calculator via HTTP endpoints. The endpoints provid
 ### Endpoints
 
 All endpoints are `GET` requests, in order to make it easy using the endpoints in a regular browser.
+Success responses have an HTTP status code of `200`, error responses have a `500` status code. 
 
 #### `/calc/:id/peek` 
 - Returns stack[top].
