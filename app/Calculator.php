@@ -46,16 +46,6 @@ class Calculator
     }
 
     /**
-     * Returns the current stack
-     *
-     * @return array the current stack
-     */
-    public function getStack()
-    {
-        return $this->stack->all();
-    }
-
-    /**
      * Returns the top from the stack and removes it
      *
      * @return float top of the stack that is removed
@@ -118,5 +108,15 @@ class Calculator
         $a = $this->pop();
 
         $this->push($a / $b);
+    }
+
+    /**
+     * Returns the current stack
+     *
+     * @return array the current stack
+     */
+    public function getStack()
+    {
+        return $this->stack->all();
     }
 }
