@@ -50,7 +50,7 @@ Success responses have an HTTP status code of `200`, error responses have a `500
 
 The application implemented in PHP and makes use of the Lumen framework. It is a '*The stunningly fast micro-framework by Laravel*'.
 
-The stack of each calculator is stored using the caching layer of the framework. This makes it possibly to configure the cache driver to use e.g. the filesystem, Redis, Memcached, or even a regular database. This improves scalability.
+The stack of each calculator is stored using the caching layer of the framework. This makes it possible to configure the cache driver to use e.g. the filesystem, Redis, Memcached, or even a regular database. This improves scalability.
 
 The `app/Calculator.php` contains all logic and each method is unit tested.
 
