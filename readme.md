@@ -32,15 +32,15 @@ Success responses have an HTTP status code of `200`, error responses have a `500
 #### `/calc/:id/subtract`
 - Removes the top and top-1 from the stack and replaces it with stack[top-1]-stack[top].
 - Returns the new stack[top].
-- Returns `error: invalid argument` when the stack contains less than two elements.
+- Returns `error: stack underflow` when the stack contains less than two elements.
 
 #### `/calc/:id/multiply`
 - Removes the top and top-1 from the stack and replaces it with stack[top-1]*stack[top].
 - Returns the new stack[top].
-- Returns `error: invalid argument` when the stack contains less than two elements.
+- Returns `error: stack underflow` when the stack contains less than two elements.
 
 #### `/calc/:id/divide`
 - Removes the top and top-1 from the stack and replaces it with stack[top-1]/stack[top].
 - Returns the new stack[top].
-- Returns `error: invalid argument` when the stack contains less than two elements.
+- Returns `error: stack underflow` when the stack contains less than two elements.
 - Returns `error: devision by zero` when stack[top] is zero.
