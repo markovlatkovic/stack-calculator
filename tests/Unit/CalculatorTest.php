@@ -67,4 +67,14 @@ class CalculatorTest extends TestCase
 
         $this->assertEquals([3], $calculator->getStack());
     }
+
+    public function testAddTwoTimes()
+    {
+        $calculator = new Calculator([1, 2, 3]);
+
+        $calculator->add();
+        $calculator->add();
+
+        $this->assertEquals([6], $calculator->getStack());
+    }
 }
