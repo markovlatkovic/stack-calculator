@@ -30,7 +30,7 @@ class CalculatorTest extends TestCase
     }
 
     /**
-     * @expectedException \App\Exceptions\EmptyStackException
+     * @expectedException \App\Exceptions\StackUnderflowException
      */
     public function testPeekThrowsExceptionWhenStackIsEmpty()
     {
@@ -76,7 +76,7 @@ class CalculatorTest extends TestCase
     }
 
     /**
-     * @expectedException \App\Exceptions\EmptyStackException
+     * @expectedException \App\Exceptions\StackUnderflowException
      */
     public function testPopThrowsExceptionWhenStackIsEmpty()
     {
@@ -104,7 +104,7 @@ class CalculatorTest extends TestCase
     }
 
     /**
-     * @expectedException \App\Exceptions\EmptyStackException
+     * @expectedException \App\Exceptions\StackUnderflowException
      */
     public function testAddThrowsExceptionWhenStackIsEmpty()
     {
@@ -113,7 +113,7 @@ class CalculatorTest extends TestCase
     }
 
     /**
-     * @expectedException \App\Exceptions\EmptyStackException
+     * @expectedException \App\Exceptions\StackUnderflowException
      */
     public function testAddThrowsExceptionWhenStackContainsOneElement()
     {
@@ -141,7 +141,7 @@ class CalculatorTest extends TestCase
     }
 
     /**
-     * @expectedException \App\Exceptions\EmptyStackException
+     * @expectedException \App\Exceptions\StackUnderflowException
      */
     public function testSubtractThrowsExceptionWhenStackIsEmpty()
     {
@@ -150,7 +150,7 @@ class CalculatorTest extends TestCase
     }
 
     /**
-     * @expectedException \App\Exceptions\EmptyStackException
+     * @expectedException \App\Exceptions\StackUnderflowException
      */
     public function testSubtractThrowsExceptionWhenStackContainsOneElement()
     {
@@ -178,7 +178,7 @@ class CalculatorTest extends TestCase
     }
 
     /**
-     * @expectedException \App\Exceptions\EmptyStackException
+     * @expectedException \App\Exceptions\StackUnderflowException
      */
     public function testMultiplyThrowsExceptionWhenStackIsEmpty()
     {
@@ -187,7 +187,7 @@ class CalculatorTest extends TestCase
     }
 
     /**
-     * @expectedException \App\Exceptions\EmptyStackException
+     * @expectedException \App\Exceptions\StackUnderflowException
      */
     public function testMultiplyThrowsExceptionWhenStackContainsOneElement()
     {
@@ -215,7 +215,7 @@ class CalculatorTest extends TestCase
     }
 
     /**
-     * @expectedException \App\Exceptions\EmptyStackException
+     * @expectedException \App\Exceptions\StackUnderflowException
      */
     public function testDivideThrowsExceptionWhenStackIsEmpty()
     {
@@ -224,7 +224,7 @@ class CalculatorTest extends TestCase
     }
 
     /**
-     * @expectedException \App\Exceptions\EmptyStackException
+     * @expectedException \App\Exceptions\StackUnderflowException
      */
     public function testDivideThrowsExceptionWhenStackContainsOneElement()
     {

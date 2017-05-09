@@ -5,7 +5,7 @@ namespace App\Exceptions;
 
 use RuntimeException;
 
-class EmptyStackException extends RuntimeException
+class StackUnderflowException extends RuntimeException
 {
 
 }

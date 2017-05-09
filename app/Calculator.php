@@ -3,7 +3,7 @@
 namespace App;
 
 
-use App\Exceptions\EmptyStackException;
+use App\Exceptions\StackUnderflowException;
 use Illuminate\Support\Collection;
 
 class Calculator
@@ -27,12 +27,12 @@ class Calculator
      * Returns the top of the stack
      *
      * @return int stack[top]
-     * @throws EmptyStackException when the stack is empty
+     * @throws StackUnderflowException when the stack is empty
      */
     public function peek()
     {
         if ($this->stack->isEmpty()) {
-            throw new EmptyStackException;
+            throw new StackUnderflowException;
         }
 
         return $this->stack->last();
@@ -56,7 +56,7 @@ class Calculator
     public function pop()
     {
         if ($this->stack->isEmpty()) {
-            throw new EmptyStackException;
+            throw new StackUnderflowException;
         }
 
         return $this->stack->pop();
@@ -68,7 +68,7 @@ class Calculator
     public function add()
     {
         if ($this->stack->count() < 2) {
-            throw new EmptyStackException;
+            throw new StackUnderflowException;
         }
 
         // [..., a, b]
@@ -85,7 +85,7 @@ class Calculator
     public function subtract()
     {
         if ($this->stack->count() < 2) {
-            throw new EmptyStackException;
+            throw new StackUnderflowException;
         }
 
         // [..., a, b]
@@ -102,7 +102,7 @@ class Calculator
     public function multiply()
     {
         if ($this->stack->count() < 2) {
-            throw new EmptyStackException;
+            throw new StackUnderflowException;
         }
 
         // [..., a, b]
@@ -119,7 +119,7 @@ class Calculator
     public function divide()
     {
         if ($this->stack->count() < 2) {
-            throw new EmptyStackException;
+            throw new StackUnderflowException;
         }
 
         // [..., a, b]
